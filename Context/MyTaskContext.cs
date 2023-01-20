@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyTasksAPI.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace MyTasksAPI.Context
 {
-    public class MyTaskContext: DbContext
+    public class MyTaskContext: IdentityDbContext<IdentityUser>
     {
         public DbSet<Usuario> User { get; set; }
         public DbSet<TipoTask> TipoTask { get; set; }
@@ -20,12 +22,14 @@ namespace MyTasksAPI.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
             builder.Entity<Usuario>().Property(p => p.Email).IsRequired().HasMaxLength(256);
             builder.Entity<Usuario>().Property(p => p.Nome).HasMaxLength(200);
-            builder.Entity<Tarefa>().Property(p => p.Data_Criacao).IsRequired();
+            builder.Entity<Tarefa>().Property(p => p.DataCriacao).IsRequired();
             builder.Entity<Tarefa>().Property(p => p.Descricao).IsRequired().HasMaxLength(300);
             builder.Entity<Tarefa>().Property(p => p.Prioridade).IsRequired();
             builder.Entity<TipoTask>().Property(p => p.Nome).IsRequired();
+            
         }
         
     }
