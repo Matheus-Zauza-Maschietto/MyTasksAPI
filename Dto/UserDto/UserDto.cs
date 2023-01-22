@@ -15,7 +15,6 @@ namespace MyTasksAPI.Dto.UserDto
             email = user.UserName;
             password = user.PasswordHash;
         }
-
         public UserDto()
         {
             
