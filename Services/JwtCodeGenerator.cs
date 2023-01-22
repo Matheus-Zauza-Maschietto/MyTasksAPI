@@ -8,16 +8,16 @@ namespace MyTasksAPI.Services
 {
     public class JwtCodeGenerator
     {
-        public static string GenerateToken(ClaimsIdentity subject)
+        public static string GenerateToken(ClaimsIdentity ClaimsToToken)
         {
             var key = Encoding.ASCII.GetBytes(_configuration["JwtBearerTokenSettings:SecretKey"]);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = subject,
+                Subject = ClaimsToToken,
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
                 Audience = _configuration["JwtBearerTokenSettings:Audience"],
                 Issuer = _configuration["JwtBearerTokenSettings:Issuer"],
-                Expires = DateTime.UtcNow.AddMinutes(6)
+                Expires = DateTime.UtcNow.AddHours(1.5)
             };
             
             var TokenHandler = new JwtSecurityTokenHandler();
