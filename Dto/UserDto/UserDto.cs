@@ -8,12 +8,12 @@ namespace MyTasksAPI.Dto.UserDto
 {
     public class UserDto
     {
-        public string email { get; set; }
-        public string password { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
         public UserDto(IdentityUser user)
         {
-            email = user.UserName;
-            password = user.PasswordHash;
+            Email = user.UserName;
+            Password = user.PasswordHash;
         }
         public UserDto()
         {

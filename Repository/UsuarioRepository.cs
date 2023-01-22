@@ -28,41 +28,55 @@ namespace MyTasksAPI.Repository
         public bool CriarUsuario(IdentityUser user, string password)
         {
             var result = _context.CreateAsync(user, password).Result;
+            
             return result.Succeeded;
         }
 
-        public Object BuscandoUsuario(UserDto dto)
+        public ResponseUserDto BuscandoUsuario(UserDto dto)
         {
-            var user = _context.FindByEmailAsync(dto.email).Result;
+            var user = _context.FindByEmailAsync(dto.Email).Result;
 
             if(user == null)
-            {
-                return new ResponseUserDto{
-                    
-                };
+            { 
+                return new ResponseUserDto(erros: new List<string>{"Usuario não encontrado"});
             }
 
-            if(!_context.CheckPasswordAsync(user, dto.password).Result)
+            if(!_context.CheckPasswordAsync(user, dto.Password).Result)
             {
-                return new {token = "", mensagem = "Senha incorreta"};
+                return new ResponseUserDto(erros: new List<string>{"Senha incorreta"});
             }
 
             var Subject = new ClaimsIdentity(new Claim[]
             {
-                new Claim(ClaimTypes.Email, dto.email),
+                new Claim(ClaimTypes.Email, dto.Email),
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
             });
 
-
-            return new {token = JwtCodeGenerator.GenerateToken(Subject, _configuration), mensagem = "Usuario logado com sucesso"};
+            return new ResponseUserDto(email: user.Email,
+                                       jwtToken: JwtCodeGenerator.GenerateToken(Subject, _configuration),
+                                       erros: new List<string>{"Usuario logado com sucesso"});
         }
 
-        public Object AlterandoSenhaUsuario(UserPasswordUpdateDto dto)
-        {
-            var user = _context.FindByEmailAsync(dto.email);
+        // public Object AlterandoSenhaUsuario(UserPasswordUpdateDto dto)
+        // {
+        //     var user = _context.FindByEmailAsync(dto.Email).Result;
+
+        //     if(user == null)
+        //     { 
+        //         return new ResponseUserDto(erros: new List<string>{"Usuario não encontrado"});
+        //     }
+
+        //     if(!_context.CheckPasswordAsync(user, dto.OldPassword).Result)
+        //     {
+        //         return new ResponseUserDto(erros: new List<string>{"Senha antiga incorreta"});
+        //     }
+
+        //     _context
 
 
-            return new {};
-        }
+
+
+        //     return new {};
+        // }
     }
 }

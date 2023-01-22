@@ -28,15 +28,15 @@ namespace MyTasksAPI.Controllers
         [HttpPost] 
         public IActionResult CadastroUsuario(UserDto dto)
         {
-            if(!Validations.EmailValidation(dto.email))
+            if(!Validations.EmailValidation(dto.Email))
                 return BadRequest(new {mensagem = "O email enviado não é valido"});
 
             var user = new IdentityUser
             {
-                UserName = dto.email,
-                Email = dto.email
+                UserName = dto.Email,
+                Email = dto.Email
             };
-            var result = _repository.CriarUsuario(user, dto.password);
+            var result = _repository.CriarUsuario(user, dto.Password);
             if(result)
             {   
                 return Ok(new {mensagem = "Usuario Cadastrado com sucesso"});
@@ -48,14 +48,17 @@ namespace MyTasksAPI.Controllers
         [HttpGet]
         public IActionResult LoginUsuario(UserDto dto)
         {
-            var tokenUsuario = _repository.BuscandoUsuario(dto);
-            if(tokenUsuario is not null)
-            {
-                return Ok(tokenUsuario);
-            }
-                
-            return NotFound(new {mensagem= "Usuario não encontrado"});
+            var usuario = _repository.BuscandoUsuario(dto);
+            if(usuario.Email is null)
+                return NotFound(new {mensagem=usuario.Erros});
+
+            return Ok(usuario);
         }   
 
+        // [HttpPut]
+        // public IActionResult AlterandoSenhaUsuario(UserPasswordUpdateDto)
+        // {
+            
+        // }
     }
 }

@@ -7,7 +7,12 @@ namespace MyTasksAPI.Models
 {
     public class TipoTask
     {
-        public Guid id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
+
+        public TipoTask(string nome)
+        {
+            Nome = nome;
+        }
     }
 }
