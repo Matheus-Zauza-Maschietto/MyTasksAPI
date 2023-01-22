@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using MyTasksAPI.Dto.TaskDto;
 
 namespace MyTasksAPI.Models
 {
@@ -18,5 +19,17 @@ namespace MyTasksAPI.Models
         public DateTime? DataFinalizacao { get; set; }
         public int IdTipoTask { get; set; }
         public TipoTask TipoTask { get; set; }
+
+        public Tarefa()
+        {
+            
+        }
+        public Tarefa(TaskDto dto)
+        {
+            IdUsuario = dto.EmailUsuario;
+            Prioridade = dto.Prioridade;
+            Descricao = dto.Descricao;
+            IdTipoTask = dto.IdTipoTask;
+        }
     }
 }

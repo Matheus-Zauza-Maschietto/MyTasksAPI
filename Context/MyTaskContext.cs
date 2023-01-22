@@ -1,3 +1,4 @@
+using System.Reflection.Metadata.Ecma335;
 using System.Collections.Immutable;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace MyTasksAPI.Context
             builder.Entity<Tarefa>().Property(p => p.Descricao).IsRequired().HasMaxLength(300);
             builder.Entity<Tarefa>().Property(p => p.Prioridade).IsRequired();
             builder.Entity<TipoTask>().Property(p => p.Nome).IsRequired();
+            
             
         }
         

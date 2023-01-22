@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyTasksAPI.Context;
+using MyTasksAPI.Models;
 
 namespace MyTasksAPI.Repository
 {
@@ -14,6 +15,11 @@ namespace MyTasksAPI.Repository
             _context = context;
         }
 
-        
+        public void CriarTask(Tarefa task)
+        {
+            _context.Users.Where(p => p.Email == task.IdUsuario)
+            _context.Tasks.Add(task);
+            _context.SaveChanges();
+        }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyTasksAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class creatingFirstMigration : Migration
+    public partial class updatingIdTypeColumnOfTipoTask : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace MyTasksAPI.Migrations
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
                     PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -54,12 +54,13 @@ namespace MyTasksAPI.Migrations
                 name: "TipoTask",
                 columns: table => new
                 {
-                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TipoTask", x => x.id);
+                    table.PrimaryKey("PK_TipoTask", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,7 +195,7 @@ namespace MyTasksAPI.Migrations
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataFinalizacao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IdTipoTask = table.Column<int>(type: "int", nullable: false),
-                    TipoTaskid = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    TipoTaskId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -205,10 +206,10 @@ namespace MyTasksAPI.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Tasks_TipoTask_TipoTaskid",
-                        column: x => x.TipoTaskid,
+                        name: "FK_Tasks_TipoTask_TipoTaskId",
+                        column: x => x.TipoTaskId,
                         principalTable: "TipoTask",
-                        principalColumn: "id");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -244,6 +245,12 @@ namespace MyTasksAPI.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -251,9 +258,9 @@ namespace MyTasksAPI.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_TipoTaskid",
+                name: "IX_Tasks_TipoTaskId",
                 table: "Tasks",
-                column: "TipoTaskid");
+                column: "TipoTaskId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tasks_UsuarioId",

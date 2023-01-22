@@ -12,8 +12,8 @@ using MyTasksAPI.Context;
 namespace MyTasksAPI.Migrations
 {
     [DbContext(typeof(MyTaskContext))]
-    [Migration("20230122171624_updatingEmailFieldTOUnicAndRequired")]
-    partial class updatingEmailFieldTOUnicAndRequired
+    [Migration("20230122200927_updatingIdTypeColumnOfTipoTask")]
+    partial class updatingIdTypeColumnOfTipoTask
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,15 +253,15 @@ namespace MyTasksAPI.Migrations
                     b.Property<int>("Prioridade")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("TipoTaskid")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("TipoTaskId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoTaskid");
+                    b.HasIndex("TipoTaskId");
 
                     b.HasIndex("UsuarioId");
 
@@ -270,15 +270,17 @@ namespace MyTasksAPI.Migrations
 
             modelBuilder.Entity("MyTasksAPI.Models.TipoTask", b =>
                 {
-                    b.Property<Guid>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
                     b.ToTable("TipoTask");
                 });
@@ -361,7 +363,7 @@ namespace MyTasksAPI.Migrations
                 {
                     b.HasOne("MyTasksAPI.Models.TipoTask", "TipoTask")
                         .WithMany()
-                        .HasForeignKey("TipoTaskid");
+                        .HasForeignKey("TipoTaskId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
                         .WithMany()

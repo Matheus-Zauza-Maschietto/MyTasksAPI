@@ -13,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoMatheus")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<UsuarioRepository>();
+builder.Services.AddScoped<TaskRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
