@@ -85,3 +85,10 @@ C:\Users\matheus.maschietto\Documents\GitHub\MyTasksAPI\bin\Debug\net6.0\Microso
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.dll
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\refint\MyTasksAPI.dll
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.pdb
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.csproj.AssemblyReference.cache
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.AssemblyInfoInputs.cache
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.AssemblyInfo.cs
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.csproj.CoreCompileInputs.cache
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.MvcApplicationPartsAssemblyInfo.cache
