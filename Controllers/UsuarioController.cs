@@ -9,6 +9,7 @@ using MyTasksAPI.Repository;
 using MyTasksAPI.Dto.UserDto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using MyTasksAPI.Services;
 
 namespace MyTasksAPI.Controllers
 {   
@@ -24,9 +25,12 @@ namespace MyTasksAPI.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost] 
         public IActionResult CadastroUsuario(UserDto dto)
         {
+            if(!Validations.EmailValidation(dto.email))
+                return BadRequest(new {mensagem = "O email enviado não é valido"});
+
             var user = new IdentityUser
             {
                 UserName = dto.email,
@@ -34,8 +38,10 @@ namespace MyTasksAPI.Controllers
             };
             var result = _repository.CriarUsuario(user, dto.password);
             if(result)
-                return Ok(user);
-            return BadRequest();
+            {   
+                return Ok(new {mensagem = "Usuario Cadastrado com sucesso"});
+            }
+            return BadRequest(new {mensagem = "Não foi possivel fazer login"});
         }
 
         [AllowAnonymous]
@@ -44,7 +50,10 @@ namespace MyTasksAPI.Controllers
         {
             var tokenUsuario = _repository.BuscandoUsuario(dto);
             if(tokenUsuario is not null)
+            {
                 return Ok(tokenUsuario);
+            }
+                
             return NotFound(new {mensagem= "Usuario não encontrado"});
         }   
 

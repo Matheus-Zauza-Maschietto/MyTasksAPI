@@ -6,12 +6,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Identity;
+using System.Text;
 
 namespace MyTasksAPI.Services
 {
     public class JwtCodeGenerator
     {
-        public static string GenerateToken(ClaimsIdentity ClaimsToToken)
+        public static string GenerateToken(ClaimsIdentity ClaimsToToken, IConfiguration _configuration)
         {
             var key = Encoding.ASCII.GetBytes(_configuration["JwtBearerTokenSettings:SecretKey"]);
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -26,7 +27,7 @@ namespace MyTasksAPI.Services
             var TokenHandler = new JwtSecurityTokenHandler();
 
             var pretoken = TokenHandler.CreateToken(tokenDescriptor);
-            token = TokenHandler.WriteToken(pretoken);
+            string token = TokenHandler.WriteToken(pretoken);
             return token;
         }
     }

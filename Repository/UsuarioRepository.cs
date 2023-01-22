@@ -12,6 +12,7 @@ using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using MyTasksAPI.Services;
 
+
 namespace MyTasksAPI.Repository
 {
     public class UsuarioRepository
@@ -33,12 +34,12 @@ namespace MyTasksAPI.Repository
         public Object BuscandoUsuario(UserDto dto)
         {
             var user = _context.FindByEmailAsync(dto.email).Result;
-            
-            string token;
 
             if(user == null)
             {
-                return new {token = "", mensagem = "Usuario não encontrada"};
+                return new ResponseUserDto{
+                    
+                };
             }
 
             if(!_context.CheckPasswordAsync(user, dto.password).Result)
@@ -52,22 +53,16 @@ namespace MyTasksAPI.Repository
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
             });
 
-            //var key = Encoding.ASCII.GetBytes(_configuration["JwtBearerTokenSettings:SecretKey"]);
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = Subject,
-            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
-            //    Audience = _configuration["JwtBearerTokenSettings:Audience"],
-            //    Issuer = _configuration["JwtBearerTokenSettings:Issuer"],
-            //    Expires = DateTime.UtcNow.AddMinutes(6)
-            //};
-            
-            //var TokenHandler = new JwtSecurityTokenHandler();
 
-            //var pretoken = TokenHandler.CreateToken(tokenDescriptor);
-            //token = TokenHandler.WriteToken(pretoken);
+            return new {token = JwtCodeGenerator.GenerateToken(Subject, _configuration), mensagem = "Usuario logado com sucesso"};
+        }
 
-            return new {token = JwtCodeGenerator.GenerateToken(Subject), mensagem = "Usuario logado com sucesso"};
+        public Object AlterandoSenhaUsuario(UserPasswordUpdateDto dto)
+        {
+            var user = _context.FindByEmailAsync(dto.email);
+
+
+            return new {};
         }
     }
 }

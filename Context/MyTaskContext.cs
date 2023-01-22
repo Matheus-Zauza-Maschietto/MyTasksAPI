@@ -22,7 +22,8 @@ namespace MyTasksAPI.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            builder.Entity<IdentityUser>().Property(p => p.Email).IsRequired();
+            builder.Entity<IdentityUser>().HasIndex(p => p.Email).IsUnique();
             builder.Entity<Usuario>().Property(p => p.Email).IsRequired().HasMaxLength(256);
             builder.Entity<Usuario>().Property(p => p.Nome).HasMaxLength(200);
             builder.Entity<Tarefa>().Property(p => p.DataCriacao).IsRequired();
