@@ -28,7 +28,6 @@ namespace MyTasksAPI.Repository
         public bool CriarUsuario(IdentityUser user, string password)
         {
             var result = _context.CreateAsync(user, password).Result;
-            
             return result.Succeeded;
         }
 

@@ -30,5 +30,11 @@ namespace MyTasksAPI.Models
             Descricao = dto.Descricao;
             TipoTask = dto.TipoTask;
         }
+        public void MapearResponseTarefa(TaskDto dto)
+        {
+            Prioridade = dto.Prioridade;
+            Descricao = dto.Descricao;
+            TipoTask = dto.TipoTask;
+        }
     }
 }

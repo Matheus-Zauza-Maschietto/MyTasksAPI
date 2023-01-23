@@ -23,14 +23,37 @@ namespace MyTasksAPI.Controllers
         public IActionResult CriarTask(TaskDto dto)
         {
             var task = new Tarefa(dto);
-            try{
-                _repository.CriarTask(task);
-                return Ok();
-            }
-            catch{
-                return BadRequest("Ocorreu um erro interno");
-            }
+            var taskDto = _repository.CriarTask(task);
+            if(taskDto.EmailUsuario is not null)
+                return Ok(taskDto);
+            return BadRequest("Ocorreu um erro interno");
             
         }
-    }
-}
+
+        [HttpGet("{email}")]
+        public IActionResult BuscarTask(string email)
+        {
+            var Tasks = _repository.BuscarTarefasEmail(email);
+            if(Tasks.Count == 0)
+                return NotFound($"Nenhuma tarefa foi encontrada atrelada ao email {email}");
+            return Ok(Tasks);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult AlterarTask(Guid id, TaskDto dto)
+        {
+            if(_repository.AlterarTask(dto, id))
+                return Ok(dto);
+            return BadRequest("Não foi possivel alterar a task");
+                
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeletarTask(Guid id)
+        {
+            if(_repository.DeletarTask(id))
+                return Ok("Task deletada com sucesso");
+            return BadRequest("Ocorreu um erro ao deletar a task");
+        }   
+    } 
+} 
