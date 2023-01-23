@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyTasksAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class updatingIdTypeColumnOfTipoTask : Migration
+    public partial class creatingFirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,19 +48,6 @@ namespace MyTasksAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TipoTask",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TipoTask", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,8 +181,7 @@ namespace MyTasksAPI.Migrations
                     Descricao = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataFinalizacao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IdTipoTask = table.Column<int>(type: "int", nullable: false),
-                    TipoTaskId = table.Column<int>(type: "int", nullable: true)
+                    TipoTask = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -204,11 +190,6 @@ namespace MyTasksAPI.Migrations
                         name: "FK_Tasks_AspNetUsers_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Tasks_TipoTask_TipoTaskId",
-                        column: x => x.TipoTaskId,
-                        principalTable: "TipoTask",
                         principalColumn: "Id");
                 });
 
@@ -258,11 +239,6 @@ namespace MyTasksAPI.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tasks_TipoTaskId",
-                table: "Tasks",
-                column: "TipoTaskId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Tasks_UsuarioId",
                 table: "Tasks",
                 column: "UsuarioId");
@@ -297,9 +273,6 @@ namespace MyTasksAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "TipoTask");
         }
     }
 }

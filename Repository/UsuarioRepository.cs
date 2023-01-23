@@ -54,7 +54,7 @@ namespace MyTasksAPI.Repository
 
             return new ResponseUserDto(email: user.Email,
                                        jwtToken: JwtCodeGenerator.GenerateToken(Subject, _configuration),
-                                       erros: new List<string>{"Usuario logado com sucesso"});
+                                       erros: new List<string>());
         }
 
         // public Object AlterandoSenhaUsuario(UserPasswordUpdateDto dto)

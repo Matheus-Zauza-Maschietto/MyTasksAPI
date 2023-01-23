@@ -10,6 +10,6 @@ namespace MyTasksAPI.Dto.TaskDto
         public string EmailUsuario { get; set; }
         public int Prioridade { get; set; }
         public string Descricao { get; set; }
-        public int IdTipoTask { get; set; }
+        public string TipoTask { get; set; }
     }
 }

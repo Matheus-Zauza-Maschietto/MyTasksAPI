@@ -241,45 +241,23 @@ namespace MyTasksAPI.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<int>("IdTipoTask")
-                        .HasColumnType("int");
-
                     b.Property<string>("IdUsuario")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Prioridade")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TipoTaskId")
-                        .HasColumnType("int");
+                    b.Property<string>("TipoTask")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UsuarioId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("TipoTaskId");
-
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("MyTasksAPI.Models.TipoTask", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TipoTask");
                 });
 
             modelBuilder.Entity("MyTasksAPI.Models.Usuario", b =>
@@ -358,15 +336,9 @@ namespace MyTasksAPI.Migrations
 
             modelBuilder.Entity("MyTasksAPI.Models.Tarefa", b =>
                 {
-                    b.HasOne("MyTasksAPI.Models.TipoTask", "TipoTask")
-                        .WithMany()
-                        .HasForeignKey("TipoTaskId");
-
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
-
-                    b.Navigation("TipoTask");
 
                     b.Navigation("Usuario");
                 });

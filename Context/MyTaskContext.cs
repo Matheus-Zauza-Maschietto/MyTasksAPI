@@ -14,7 +14,6 @@ namespace MyTasksAPI.Context
     public class MyTaskContext: IdentityDbContext<IdentityUser>
     {
         public DbSet<Usuario> User { get; set; }
-        public DbSet<TipoTask> TipoTask { get; set; }
         public DbSet<Tarefa> Tasks { get; set; }
 
         public MyTaskContext(DbContextOptions<MyTaskContext> options): base(options)
@@ -30,7 +29,6 @@ namespace MyTasksAPI.Context
             builder.Entity<Tarefa>().Property(p => p.DataCriacao).IsRequired();
             builder.Entity<Tarefa>().Property(p => p.Descricao).IsRequired().HasMaxLength(300);
             builder.Entity<Tarefa>().Property(p => p.Prioridade).IsRequired();
-            builder.Entity<TipoTask>().Property(p => p.Nome).IsRequired();
             
             
         }

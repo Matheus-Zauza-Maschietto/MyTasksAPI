@@ -17,8 +17,7 @@ namespace MyTasksAPI.Models
         public string Descricao { get; set; }
         public DateTime DataCriacao { get; set; }
         public DateTime? DataFinalizacao { get; set; }
-        public int IdTipoTask { get; set; }
-        public TipoTask TipoTask { get; set; }
+        public string TipoTask { get; set; }
 
         public Tarefa()
         {
@@ -29,7 +28,7 @@ namespace MyTasksAPI.Models
             IdUsuario = dto.EmailUsuario;
             Prioridade = dto.Prioridade;
             Descricao = dto.Descricao;
-            IdTipoTask = dto.IdTipoTask;
+            TipoTask = dto.TipoTask;
         }
     }
 }
