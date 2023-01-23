@@ -17,7 +17,7 @@ namespace MyTasksAPI.Repository
 
         public void CriarTask(Tarefa task)
         {
-            _context.Users.Where(p => p.Email == task.IdUsuario)
+            _context.Users.Where(p => p.Email == task.IdUsuario);
             _context.Tasks.Add(task);
             _context.SaveChanges();
         }

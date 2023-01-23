@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj": {}
+    "C:\\Users\\matheus.maschietto\\Documents\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj": {
+    "C:\\Users\\matheus.maschietto\\Documents\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj",
+        "projectUniqueName": "C:\\Users\\matheus.maschietto\\Documents\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj",
         "projectName": "MyTasksAPI",
-        "projectPath": "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj",
-        "packagesPath": "C:\\Users\\mathe\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mathe\\OneDrive\\Documentos\\GitHub\\MyTasksAPI\\obj\\",
+        "projectPath": "C:\\Users\\matheus.maschietto\\Documents\\GitHub\\MyTasksAPI\\MyTasksAPI.csproj",
+        "packagesPath": "C:\\Users\\matheus.maschietto\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\matheus.maschietto\\Documents\\GitHub\\MyTasksAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\mathe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\matheus.maschietto\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -82,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

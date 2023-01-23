@@ -10,7 +10,7 @@ using MyTasksAPI.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoMatheus")));
+builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoMatheusWork")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<TaskRepository>();
