@@ -14,7 +14,8 @@ builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(bui
 builder.Services.AddControllers();
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<TaskRepository>();
-
+builder.Services.AddScoped<LoginRepository>();
+ 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

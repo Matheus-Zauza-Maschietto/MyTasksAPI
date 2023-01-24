@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +11,7 @@ using MyTasksAPI.Dto.UserDto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using MyTasksAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MyTasksAPI.Controllers
 {   
@@ -26,7 +28,7 @@ namespace MyTasksAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost] 
-        public IActionResult CadastroUsuario(UserDto dto)
+        public IActionResult CadastroUsuario(LoginDto dto)
         {
             if(!Validations.EmailValidation(dto.Email))
                 return BadRequest(new {mensagem = "O email enviado não é valido"});
@@ -42,17 +44,6 @@ namespace MyTasksAPI.Controllers
                 return Ok(new {mensagem = "Usuario Cadastrado com sucesso"});
             }
             return BadRequest(new {mensagem = "Não foi possivel fazer login"});
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
-        public IActionResult LoginUsuario(UserDto dto)
-        {
-            var usuario = _repository.BuscandoUsuario(dto);
-            if(usuario.Email is null)
-                return NotFound(new {mensagem=usuario.Erros});
-
-            return Ok(usuario);
         }   
 
         // [HttpPut]

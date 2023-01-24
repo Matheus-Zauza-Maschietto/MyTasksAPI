@@ -15,24 +15,17 @@ using MyTasksAPI.Services;
 
 namespace MyTasksAPI.Repository
 {
-    public class UsuarioRepository
+    public class LoginRepository
     {
         private readonly UserManager<IdentityUser> _context;
         private readonly IConfiguration _configuration;
-        public UsuarioRepository(UserManager<IdentityUser> context, IConfiguration configuration)
+        public LoginRepository(UserManager<IdentityUser> context, IConfiguration configuration)
         {
             _context = context; 
             _configuration = configuration;           
         }
 
-        public bool CriarUsuario(IdentityUser user, string password)
-        {
-            var result = _context.CreateAsync(user, password).Result;
-            return result.Succeeded;
-        }
-
-        public ResponseUserDto BuscandoUsuario(LoginDto dto)
-        {
+        public ResponseUserDto Logar(LoginDto dto){
             var user = _context.FindByEmailAsync(dto.Email).Result;
 
             if(user == null)
@@ -44,7 +37,6 @@ namespace MyTasksAPI.Repository
             {
                 return new ResponseUserDto(erros: new List<string>{"Senha incorreta"});
             }
-
             var Subject = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Email, dto.Email),
@@ -55,27 +47,5 @@ namespace MyTasksAPI.Repository
                                        jwtToken: JwtCodeGenerator.GenerateToken(Subject, _configuration),
                                        erros: new List<string>());
         }
-
-        // public Object AlterandoSenhaUsuario(UserPasswordUpdateDto dto)
-        // {
-        //     var user = _context.FindByEmailAsync(dto.Email).Result;
-
-        //     if(user == null)
-        //     { 
-        //         return new ResponseUserDto(erros: new List<string>{"Usuario não encontrado"});
-        //     }
-
-        //     if(!_context.CheckPasswordAsync(user, dto.OldPassword).Result)
-        //     {
-        //         return new ResponseUserDto(erros: new List<string>{"Senha antiga incorreta"});
-        //     }
-
-        //     _context
-
-
-
-
-        //     return new {};
-        // }
     }
 }
