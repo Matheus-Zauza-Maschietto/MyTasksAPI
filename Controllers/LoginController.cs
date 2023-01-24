@@ -10,7 +10,7 @@ using MyTasksAPI.Repository;
 namespace MyTasksAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/login")]
     public class LoginController: ControllerBase
     {
         private readonly LoginRepository _repository;

@@ -17,18 +17,19 @@ namespace MyTasksAPI.Repository
             _context = context;
         }
  
-        public TaskDto CriarTask(Tarefa task)
+        public TaskDtoResponse CriarTask(TaskDto dto, string email)
         {
-            var user = _context.Users.FirstOrDefault(p => p.Email == task.IdUsuario);
+            var task = new Tarefa(dto, email);
+
+            var user = _context.Users.FirstOrDefault(p => p.Email == email);
             if(user is not null)
             {
                 task.DataCriacao = DateTime.Now;
-
                 _context.Tasks.Add(task);
                 _context.SaveChanges();  
-                return new TaskDto(task);
+                return new TaskDtoResponse(task);
             }
-            return new TaskDto();
+            return new TaskDtoResponse(erros: new List<string>{"Não foi possivel criar a tarefa, tente novamente"});
            
         }
 
@@ -38,31 +39,28 @@ namespace MyTasksAPI.Repository
             return tarefas;
         }
 
-        public bool AlterarTask(TaskDto dto, Guid taskId)
-        {
+        public TaskDtoResponse AlterarTask(TaskDto dto, Guid taskId)
+        {   
             var task = _context.Tasks.Find(taskId);
+            if(task is null)
+                return new TaskDtoResponse(erros: new List<string>{$"Não foi encontrada nenhuma task com id {taskId}"});
+            
             task.MapearResponseTarefa(dto);
-            try{
-                _context.Tasks.Update(task);
-                _context.SaveChanges();
-                return true;
-            }
-            catch{
-                return false;
-            }
+            _context.Tasks.Update(task);
+            _context.SaveChanges();
+
+            return new TaskDtoResponse(task);
         }
 
-        public bool DeletarTask(Guid taskId)
+        public TaskDtoResponse DeletarTask(Guid taskId)
         {
-            try{
-                var task = _context.Tasks.Find(taskId);
-                _context.Tasks.Remove(task);
-                _context.SaveChanges();
-                return true;
-            }
-            catch{
-                return false;
-            }
+            var task = _context.Tasks.Find(taskId);
+            if(task is null)
+                return new TaskDtoResponse(erros: new List<string>{$"Não foi encontrada nenhuma task com id {taskId}"});
+
+            _context.Tasks.Remove(task);
+            _context.SaveChanges();
+            return new TaskDtoResponse(task);
         }
     }
 }

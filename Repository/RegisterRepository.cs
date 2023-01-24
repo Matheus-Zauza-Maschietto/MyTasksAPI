@@ -23,18 +23,15 @@ namespace MyTasksAPI.Repository
             _configuration = configuration;           
         }
 
-        public ResponseUserDto RegistrarUsuario(RegisterDto dto, string password)
+        public ResponseUserDto RegistrarUsuario(RegisterDto dto)
         {
-            if(dto.Password != dto.ConfirmPassword)
-                return new ResponseUserDto(erros: new List<string>{""});
-
             var user = new IdentityUser
             {
                 UserName = dto.Email,
                 Email = dto.Email
             };
 
-            var result = _context.CreateAsync(user, password).Result;
+            var result = _context.CreateAsync(user, dto.Password).Result;
 
             var Subject = new ClaimsIdentity(new Claim[]
             {
@@ -46,7 +43,7 @@ namespace MyTasksAPI.Repository
             {
                 return new ResponseUserDto(email: dto.Email, jwtToken: JwtCodeGenerator.GenerateToken(Subject, _configuration), erros: new List<string>());
             }
-            return new ResponseUserDto(erros: new List<string>{""});
+            return new ResponseUserDto(erros: new List<string>{"Ocorreu um erro ao criar sua conta, tente novamente"});
         }
 
     }

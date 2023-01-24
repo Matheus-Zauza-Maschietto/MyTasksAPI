@@ -8,7 +8,7 @@ namespace MyTasksAPI.Dto.TaskDto
 {
     public class TaskDto
     {
-        public string EmailUsuario { get; set; }
+
         public int Prioridade { get; set; }
         public string Descricao { get; set; }
         public string TipoTask { get; set; }
@@ -20,7 +20,6 @@ namespace MyTasksAPI.Dto.TaskDto
 
         public TaskDto(Tarefa task)
         {
-            EmailUsuario = task.IdUsuario;
             Prioridade = task.Prioridade;
             Descricao = task.Descricao;
             TipoTask = task.TipoTask;

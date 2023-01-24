@@ -23,9 +23,9 @@ namespace MyTasksAPI.Models
         {
             
         }
-        public Tarefa(TaskDto dto)
+        public Tarefa(TaskDto dto, string email)
         {
-            IdUsuario = dto.EmailUsuario;
+            IdUsuario = email;
             Prioridade = dto.Prioridade;
             Descricao = dto.Descricao;
             TipoTask = dto.TipoTask;

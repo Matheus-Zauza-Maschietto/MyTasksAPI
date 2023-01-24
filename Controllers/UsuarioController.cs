@@ -26,26 +26,6 @@ namespace MyTasksAPI.Controllers
             _repository = repository;
         }
 
-        [AllowAnonymous]
-        [HttpPost] 
-        public IActionResult CadastroUsuario(LoginDto dto)
-        {
-            if(!Validations.EmailValidation(dto.Email))
-                return BadRequest(new {mensagem = "O email enviado não é valido"});
-
-            var user = new IdentityUser
-            {
-                UserName = dto.Email,
-                Email = dto.Email
-            };
-            var result = _repository.CriarUsuario(user, dto.Password);
-            if(result)
-            {   
-                return Ok(new {mensagem = "Usuario Cadastrado com sucesso"});
-            }
-            return BadRequest(new {mensagem = "Não foi possivel fazer login"});
-        }   
-
         // [HttpPut]
         // public IActionResult AlterandoSenhaUsuario(UserPasswordUpdateDto)
         // {
