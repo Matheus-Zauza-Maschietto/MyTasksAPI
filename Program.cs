@@ -61,8 +61,7 @@ builder.Services.AddCors(p => p.AddPolicy("corsapp", Builder =>
 {
     Builder.WithOrigins("*")
            .AllowAnyMethod()
-           .AllowAnyHeader()
-           .AllowAnyOrigin();
+           .AllowAnyHeader();
 }));
 
 var app = builder.Build();
@@ -81,5 +80,7 @@ app.UseHttpsRedirection();
 //app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors("corsapp");
 
 app.Run();
