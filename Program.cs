@@ -57,6 +57,14 @@ builder.Services.AddAuthentication(options => {
         };
     });
 
+builder.Services.AddCors(p => p.AddPolicy("corsapp", Builder =>
+{
+    Builder.WithOrigins("*")
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+           .AllowAnyOrigin();
+}));
+
 var app = builder.Build();
 app.UseAuthentication();
 app.UseAuthorization();
