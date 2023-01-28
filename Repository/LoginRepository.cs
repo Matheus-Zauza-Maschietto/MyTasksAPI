@@ -26,8 +26,8 @@ namespace MyTasksAPI.Repository
         }
 
         public ResponseUserDto Logar(LoginDto dto){
-            var user = _context.FindByEmailAsync(dto.Email).Result;
-
+            IdentityUser user = _context.FindByEmailAsync(dto.Email).Result;
+            
             if(user == null)
             { 
                 return new ResponseUserDto(erros: new List<string>{"Usuario não encontrado"});
