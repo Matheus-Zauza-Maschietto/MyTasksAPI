@@ -10,7 +10,7 @@ using MyTasksAPI.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoMatheusWork")));
+builder.Services.AddDbContext<MyTaskContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("ConexaoMatheusHome")));
 builder.Services.AddControllers();
 builder.Services.AddScoped<UsuarioRepository>();
 builder.Services.AddScoped<TaskRepository>();
@@ -57,7 +57,15 @@ builder.Services.AddAuthentication(options => {
         };
     });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllOrigins",
+        builder => builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod());
+});
+
 var app = builder.Build();
+app.UseCors("AllOrigins");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
@@ -70,7 +78,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-//app.UseAuthorization();
+app.UseAuthorization();
 
 app.MapControllers();
 
