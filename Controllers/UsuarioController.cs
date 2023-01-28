@@ -26,10 +26,5 @@ namespace MyTasksAPI.Controllers
             _repository = repository;
         }
 
-        // [HttpPut]
-        // public IActionResult AlterandoSenhaUsuario(UserPasswordUpdateDto)
-        // {
-            
-        // }
     }
 }
