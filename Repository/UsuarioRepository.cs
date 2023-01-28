@@ -24,5 +24,12 @@ namespace MyTasksAPI.Repository
             _context = context; 
             _configuration = configuration;           
         }
+
+        public UserDtoResponse verificaUsuario(string email){
+            var find = _context.FindByEmailAsync(email).Result;
+            
+            return new UserDtoResponse(find);
+        }
+        
     }
 }

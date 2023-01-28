@@ -29,6 +29,8 @@ namespace MyTasksAPI.Controllers
                 return NotFound(usuario);
 
             return Ok(usuario);
-        }   
+        }
+
+        
     }
 }

@@ -43,7 +43,7 @@ namespace MyTasksAPI.Repository
             {
                 return new ResponseUserDto(email: dto.Email, jwtToken: JwtCodeGenerator.GenerateToken(Subject, _configuration), erros: new List<string>());
             }
-            return new ResponseUserDto(erros: new List<string>{"Ocorreu um erro ao criar sua conta, tente novamente"});
+            return new ResponseUserDto(erros: new List<string>{$"{result}"});
         }
 
     }

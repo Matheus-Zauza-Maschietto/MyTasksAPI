@@ -35,7 +35,7 @@ namespace MyTasksAPI.Controllers
 
             if(dto.Password != dto.ConfirmPassword)
                 return BadRequest(new ResponseUserDto(erros: new List<string>{"As senhas não conhecidem"}));
-
+            
             var Usuario = _repository.RegistrarUsuario(dto);
             if(Usuario.Email is not null)
             {   

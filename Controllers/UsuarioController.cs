@@ -17,6 +17,7 @@ namespace MyTasksAPI.Controllers
 {   
     [ApiController]
     [Route("[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsuarioController : ControllerBase
     {
         private readonly UsuarioRepository _repository;
@@ -26,5 +27,15 @@ namespace MyTasksAPI.Controllers
             _repository = repository;
         }
 
+        [HttpGet]
+        public IActionResult BuscarUsuario(){
+            string email = User.FindFirstValue(ClaimTypes.Email);
+            var usuarioDto = _repository.verificaUsuario(email);
+
+            if(usuarioDto.Email is not null){
+                return Ok(usuarioDto);
+            }
+            return NotFound(usuarioDto);
+        }
     }
 }
