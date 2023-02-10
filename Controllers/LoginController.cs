@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyTasksAPI.Dto.UserDto;
 using MyTasksAPI.Repository;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace MyTasksAPI.Controllers
 {
@@ -31,6 +32,13 @@ namespace MyTasksAPI.Controllers
             return Ok(usuario);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("/validateJwt")]
+        public IActionResult ValidationJWt()
+        {
+            return Ok(new {valido = true});
+        }
+ 
         
     }
 }
