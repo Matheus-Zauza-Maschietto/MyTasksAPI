@@ -33,7 +33,7 @@ namespace MyTasksAPI.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("/validateJwt")]
+        [HttpPost("/validateJwt")]
         public IActionResult ValidationJWt()
         {
             return Ok(new {valido = true});
