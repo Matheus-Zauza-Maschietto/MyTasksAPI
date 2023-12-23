@@ -171,3 +171,4 @@ C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\bin\Debug\net6.0\System.Cod
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+C:\Users\mathe\OneDrive\Documentos\GitHub\MyTasksAPI\obj\Debug\net6.0\MyTasksAPI.sourcelink.json
